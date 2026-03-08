@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: slooze-api
+    env: node
+    plan: free
+    repo: https://github.com/your-username/slooze-backend # UPDATE THIS LATER
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: slooze-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+
+databases:
+  - name: slooze-db
+    databaseName: slooze
+    user: slooze_user
+    plan: free
