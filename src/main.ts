@@ -13,8 +13,9 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
 
-  // Using 5822
-  await app.listen(5822);
-  console.log(`Application is running on: http://localhost:5822/graphql`);
+  // Use Render's dynamic PORT env var in production, fallback to 5822 locally
+  const port = process.env.PORT || 5822;
+  await app.listen(port);
+  console.log(`Application is running on port: ${port}/graphql`);
 }
 bootstrap();
