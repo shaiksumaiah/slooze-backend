@@ -4,7 +4,7 @@ services:
     env: node
     plan: free
     repo: https://github.com/shaiksumaiah/slooze-backend
-    buildCommand: npm install --legacy-peer-deps && npx prisma generate && npm run build
+    buildCommand: npm install --legacy-peer-deps && npx prisma generate && ./node_modules/.bin/nest build
     startCommand: npm run start:prod
     envVars:
       - key: NODE_ENV
