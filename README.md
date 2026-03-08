@@ -1,98 +1,90 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+<h1 align="center">Slooze Commodities backend API</h1>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<div align="center">
+  <img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS" />
+  <img src="https://img.shields.io/badge/GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white" alt="GraphQL" />
+  <img src="https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white" alt="Prisma" />
+  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+</div>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<br />
 
-## Description
+## 📖 Overview
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This is the Official NestJS Backend API for the **Slooze Commodities Management System Challenge**, proudly created and implemented by me!
 
-## Project setup
+This API serves robust GraphQL endpoints to power the frontend interface. It is secured using passport-jwt strategies and leverages Prisma ORM to communicate with a PostgreSQL database.
 
-```bash
-$ npm install
-```
+## ✨ Features Implemented
 
-## Compile and run the project
+### 1️⃣ Authentication & Security
+- Complete JWT-based Authentication workflow (`POST /auth/login`).
+- Passwords fully encrypted via `bcrypt`.
+- Custom **GraphQL Execution Guards** (`@UseGuards(GqlAuthGuard)`) to strictly verify Bearer Tokens.
 
-```bash
-# development
-$ npm run start
+### 2️⃣ Role-Based Access Control (RBAC)
+- Strict access verification mapping authenticated users to their privileges (`MANAGER`, `STORE_KEEPER`).
+- Granular Resolver protections preventing unauthorized access natively on the backend.
 
-# watch mode
-$ npm run start:dev
+### 3️⃣ Commodities Data Management
+- Exposes efficient GraphQL Queries (`products`) to stream data to Apollo Client.
+- Supports Create, Read, and Update mutations for inventory scaling.
+- Automated Prisma Seeding mechanism to populate the database effortlessly.
 
-# production mode
-$ npm run start:prod
-```
+---
 
-## Run tests
+## 🛠 Project Setup (Local)
 
-```bash
-# unit tests
-$ npm run test
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/shaiksumaiah/slooze-backend.git
+   cd slooze-backend
+   ```
 
-# e2e tests
-$ npm run test:e2e
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-# test coverage
-$ npm run test:cov
-```
+3. **Configure the Environment:**
+   Create a `.env` file in the root directory:
+   ```env
+   DATABASE_URL="postgresql://user:password@localhost:5432/slooze"
+   JWT_SECRET="your_ultra_secure_secret_key"
+   PORT=5822
+   ```
 
-## Deployment
+4. **Initialize the Database (Prisma):**
+   ```bash
+   npx prisma migrate dev --name init
+   npx prisma db seed
+   ```
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+5. **Start the API:**
+   ```bash
+   # Development watch mode
+   npm run start:dev
+   ```
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+---
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+## 🚀 How to Deploy to Render
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+This project includes a `render.yaml` Blueprint configuration, meaning deployment is completely automated!
 
-## Resources
+1. Push your code to GitHub.
+2. Log into [Render.com](https://render.com).
+3. Click **New** -> **Blueprint**.
+4. Connect this GitHub repository.
+5. Render will automatically:
+   - Identify it as a Node.js project.
+   - Run `npx prisma generate` & `npm run build`.
+   - Provision your PostgreSQL database instance automatically.
+6. Click **Apply** and wait for the "Live" status.
 
-Check out a few resources that may come in handy when working with NestJS:
+---
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+<div align="center">
+  <p>Built with ❤️ and strictly following all architecture requirements.</p>
+</div>
