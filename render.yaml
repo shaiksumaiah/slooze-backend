@@ -3,7 +3,7 @@ services:
     name: slooze-api
     env: node
     plan: free
-    repo: https://github.com/your-username/slooze-backend # UPDATE THIS LATER
+    repo: https://github.com/shaiksumaiah/slooze-backend
     buildCommand: npm install && npx prisma generate && npm run build
     startCommand: npm run start:prod
     envVars:
